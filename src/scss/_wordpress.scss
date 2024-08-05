@@ -13522,6 +13522,9 @@ ul.is-style-checkmark-list li {
   @media (max-width: 781px) {
     .wp-block-columns:not(.is-not-stacked-on-mobile) > .wp-block-column {
       flex-basis: 100% !important;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
   }
 
@@ -13529,6 +13532,9 @@ ul.is-style-checkmark-list li {
     .wp-block-columns:not(.is-not-stacked-on-mobile) > .wp-block-column {
       flex-basis: 0;
       flex-grow: 1;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
     }
 
     .wp-block-columns:not(.is-not-stacked-on-mobile)

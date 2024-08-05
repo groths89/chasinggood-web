@@ -88,6 +88,10 @@ section:nth-of-type(2) {
     text-align: center;
 }
 
+.j-center {
+    justify-content: center;
+}
+
 .left {
     float: left;
     display: block;
@@ -133,10 +137,11 @@ section:nth-of-type(2) {
 }
 
 body { margin: 0; }
-a, :visited { text-decoration: none; color: #ffffff; }
+a, :visited { text-decoration: none; }
 a:hover { color: rgb(78, 62, 53); }
 th,td { padding: 13px !important; }
 h1 { font-size: 32pt; }
+h3.number-outline { font-size: 32pt; line-height: 1em; text-align: center; }
 section { 
     padding-top: 7.4em; 
     &.isScrolled {

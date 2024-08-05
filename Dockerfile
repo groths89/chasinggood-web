@@ -21,7 +21,7 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 COPY --from=builder /app/nginx-custom.conf /etc/nginx/conf.d/default.conf
 
 # Expose the port that Nginx listens on (typically 80)
-EXPOSE 8000
+EXPOSE 8000/tcp
 
 # Run Nginx in the foreground
 CMD ["nginx", "-g", "daemon off;"]
