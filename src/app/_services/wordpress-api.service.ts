@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class WordpressApiService {
-  private backendUrl = 'https://client1cg.thecommodoredesigns.com';
+  private backendUrl = 'https://wp.chasinggood.org';
   private endpoint = '';
 
   constructor(private http: HttpClient) { }
