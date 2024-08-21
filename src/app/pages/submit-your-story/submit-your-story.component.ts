@@ -24,12 +24,24 @@ export class SubmitYourStoryComponent implements OnInit {
       (els[index] as HTMLElement).style.paddingBottom = "var(--wp--preset--spacing--50)";
       (els[index] as HTMLElement).style.paddingLeft = "var(--wp--preset--spacing--50)";
     }
-
+*/
     const el = document.querySelectorAll('h2.wp-block-heading.alignwide.has-base-color.has-text-color.has-link-color.wp-elements-c9b5699bdecff18878afa112249018b5');
     for (let index = 0; index < el.length; index++) {
       (el[index] as HTMLElement).style.minHeight = "100px;";
       (el[index] as HTMLElement).style.letterSpacing = "-0.02em;";
-    } */
+    }
+
+    const howItWorksCard = document.querySelectorAll('.how-it-works-card');
+    for (let index = 0; index < howItWorksCard.length; index++) {
+      (howItWorksCard[index] as HTMLElement).style.borderRadius = "15px";
+      (howItWorksCard[index] as HTMLElement).style.marginTop = "var(--wp--preset--spacing--40)";
+      (howItWorksCard[index] as HTMLElement).style.marginBottom = "var(--wp--preset--spacing--40)";
+    }
+
+    const spacer = document.querySelectorAll('.wp-block-spacer');
+    for (let index = 0; index < spacer.length; index++) {
+      (spacer[index] as HTMLElement).style.height = "100px";
+    }
   }
 
   ngOnInit(): void {

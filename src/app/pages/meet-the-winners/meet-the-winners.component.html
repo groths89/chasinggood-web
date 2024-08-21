@@ -1,1 +1,18 @@
-<div class="page-wrapper" [innerHTML]="this.backendPage.content.rendered"></div>
+<div class="page-wrapper">
+  <h2>{{ this.backendPage.title.rendered }}</h2>
+  <div class="tabs">
+    <ul class="tab-links">
+      <li
+        class="tab-link"
+        *ngFor="let year of years"
+        [class.active]="year === activeYear"
+        (click)="setActiveYear(year)"
+      >
+        {{ year }}
+      </li>
+    </ul>
+    <div class="tab-content">
+      <app-winners-tab [winners]="winners"></app-winners-tab>
+    </div>
+  </div>
+</div>
