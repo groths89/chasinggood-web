@@ -5,8 +5,10 @@
       <li
         class="tab-link"
         *ngFor="let year of years"
+        [ngClass]="{ active: activeYear === year }"
         [class.active]="year === activeYear"
-        (click)="setActiveYear(year)"
+        (click)="openTab($event)"
+        [attr.data-year]="year"
       >
         {{ year }}
       </li>

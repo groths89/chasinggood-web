@@ -25,7 +25,29 @@ export interface Winner {
     chasinggood_winner_place: string,
     chasinggood_winner_year: number,
     chasinggood_winner_location: string
+  },
+  queryParams: {
+    per_page: 100,
+    order: 'DESC',
+    orderby: 'date',
+    acf: {
+      filter: {
+        where: {
+          key: 'chasinggood_winner_year',
+          compare: 'EXISTS'
+        }
+      }
+    }
   }
+}
+export interface BackendPage {
+  id: number;
+  title: {
+    rendered: string
+  };
+  content: {
+    rendered: string
+  };
 }
 @Injectable({
   providedIn: 'root'
@@ -48,7 +70,7 @@ export class WordpressApiService {
 
   getWinnersByYear(year: number): Observable<Winner[]> {
     this.endpoint = `${this.backendUrl}/wp-json/wp/v2/winners`;
-    return this.http.get<Winner[]>(`${this.endpoint}?_embed&?chasinggood_winner_year=${year}`);
+    return this.http.get<Winner[]>(`${this.endpoint}?_embed&?acf=chasinggood_winner_year=${year}`);
   }
 
   getPosts(){
@@ -61,8 +83,15 @@ export class WordpressApiService {
     return this.http.get(this.endpoint);
   }
 
-  getSinglePage(id: number) {
+  getSinglePage(id: number): Observable<BackendPage> {
     this.endpoint = `${this.backendUrl}/wp-json/wp/v2/pages/${id}`;
-    return this.http.get(this.endpoint);
+    const data = this.http.get<BackendPage>(this.endpoint);
+    return data;
+  }
+
+  async getSinglePagePromise(id: number) {
+    this.endpoint = `${this.backendUrl}/wp-json/wp/v2/pages/${id}`;
+    const data = await this.http.get(this.endpoint);
+    return data;
   }
 }

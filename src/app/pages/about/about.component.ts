@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { WordpressApiService } from '../../_services/wordpress-api.service';
+import { WordpressApiService, BackendPage } from '../../_services/wordpress-api.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-about',
@@ -7,7 +9,8 @@ import { WordpressApiService } from '../../_services/wordpress-api.service';
   styleUrls: ['./about.component.scss']
 })
 export class AboutComponent implements OnInit {
-  backendPage: any;
+  backendPage: BackendPage;
+  pageObservable: Observable<any>;
   constructor(private wordpress: WordpressApiService) { }
 
   ngAfterViewInit() {
@@ -49,7 +52,6 @@ export class AboutComponent implements OnInit {
     this.wordpress.getSinglePage(10).subscribe(
       (data) => {
         this.backendPage = data;
-        console.log(data);
       }
     );
   }

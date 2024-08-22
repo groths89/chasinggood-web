@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { WordpressApiService } from 'src/app/_services/wordpress-api.service';
+import { BackendPage, WordpressApiService } from 'src/app/_services/wordpress-api.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-contact-us',
@@ -7,7 +9,8 @@ import { WordpressApiService } from 'src/app/_services/wordpress-api.service';
   styleUrls: ['./contact-us.component.scss']
 })
 export class ContactUsComponent implements OnInit {
-  backendPage: any;
+  pageObservable: Observable<any>;
+  backendPage: BackendPage;
   constructor(private wordpress: WordpressApiService) { }
 
   ngOnInit(): void {

@@ -1,9 +1,9 @@
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { WordpressApiService } from 'src/app/_services/wordpress-api.service';
+import { Subject, Observable } from 'rxjs';
+import { takeUntil, map } from 'rxjs/operators';;
+import { BackendPage, WordpressApiService } from 'src/app/_services/wordpress-api.service';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +11,7 @@ import { WordpressApiService } from 'src/app/_services/wordpress-api.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnDestroy, OnInit {
+  pageObservable: Observable<any>;
   destroyed = new Subject<void>();
   currentScreenSize: string;
 
@@ -19,7 +20,7 @@ export class HomeComponent implements OnDestroy, OnInit {
     [Breakpoints.Medium, 'Medium'],
     [Breakpoints.Large, 'Large'],
   ]);
-  backendPage: any;
+  backendPage: BackendPage;
 
   constructor(public _router: Router, private observer: BreakpointObserver, private wordpress: WordpressApiService) { 
     this.observer

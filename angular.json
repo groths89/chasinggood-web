@@ -54,9 +54,6 @@
 						"styles": [
 							"src/styles.scss"
 						],
-						"scripts": [
-							"src/assets/js/custom.js"
-						],
 						"extraWebpackConfig": "webpack.config.js",
 						"commonChunk": false
 					},

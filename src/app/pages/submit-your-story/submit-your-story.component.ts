@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { WordpressApiService } from 'src/app/_services/wordpress-api.service';
+import { BackendPage, WordpressApiService } from 'src/app/_services/wordpress-api.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-submit-your-story',
@@ -7,7 +9,8 @@ import { WordpressApiService } from 'src/app/_services/wordpress-api.service';
   styleUrls: ['./submit-your-story.component.scss']
 })
 export class SubmitYourStoryComponent implements OnInit {
-  backendPage: any;
+  pageObservable: Observable<any>;
+  backendPage: BackendPage;
 
 
   constructor(private wordpress: WordpressApiService) {
@@ -50,7 +53,7 @@ export class SubmitYourStoryComponent implements OnInit {
 
   getPage() {
     this.wordpress.getSinglePage(59).subscribe(
-      (data: Array<object>) => {
+      (data) => {
         this.backendPage = data;
       }
     )
