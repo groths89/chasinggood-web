@@ -15,6 +15,7 @@
     </ul>
     <div class="tab-content" [attr.aria-label]="this.activeYear">
       <app-winners-tab
+        [organizedData]="organizedData"
         [winnersByYear]="winnersByYear"
         [activeYear]="this.activeYear"
       ></app-winners-tab>

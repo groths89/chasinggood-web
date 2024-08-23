@@ -10,11 +10,14 @@ export class WinnersTabComponent implements OnInit {
   @Input() keys: string[];
   @Input() activeYear: number | null = 2024;
   @Input() winners: Winner[] = [];
-  @Input() winnersByYear: {[year: number]: Winner[] } = {};
+  @Input() winnersByYear: {[year: number]: any } = {};
+  @Input() organizedData: any;
+
   constructor() { }
 
   ngOnInit(): void {
-
+    console.log("Winners By Year From Child: ", this.winnersByYear)
+    console.log("Organized Data From Child: ", this.organizedData)
   }
 
 }

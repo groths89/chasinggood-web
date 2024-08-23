@@ -14,12 +14,13 @@ export class MeetTheWinnersComponent implements OnInit {
   backendPage: BackendPage;
   winners: Winner[] = [];
   years: number[] = [];
-  activeYear: number | null = 2024;
+  activeYear: number | null = currentYear;
   winnersByYear: {[year: number]: Winner[] } = {}
   tabLinks = document.querySelectorAll('.tab-link');
   tabContent: HTMLElement[] = [];
   winnersResponse: any[] = [];
   prop:any
+  organizedData:any
 
   constructor(private wordpress: WordpressApiService) { }
 
@@ -27,9 +28,11 @@ export class MeetTheWinnersComponent implements OnInit {
     //this.setActiveYear(this.activeYear);
     //this.getSingleWinner(47);
     this.getWinners(this.activeYear);
+    this.organizedData;
     this.keys();
     this.getPage();
-    
+    console.log("Winners By Year From Parent: ", this.winnersByYear)
+    console.log("Organized Data From Parent: ", this.organizedData)
         // Add event listeners to tab links
         //this.tabLinks.forEach(tab => {
         //  tab.addEventListener('click', this.openTab);
@@ -60,18 +63,18 @@ export class MeetTheWinnersComponent implements OnInit {
     )
   }
 
-  getWinners(year: number): void {
+  getWinners(year: number): Winner {
     this.wordpress.getWinnersByYear(year).subscribe(data => {
       this.winners = data;
-      this.organizeWinnersByYear(data);
-      this.activeYear = Number(Object.keys(this.winnersByYear)[0]);
-      console.log("Active Year: ", this.activeYear)
+      this.organizedData = this.organizeWinnersByYear(data);
+      console.log("Organized Data from Get Winners: ", this.organizedData)
 /*       for (let key in data) {
           if(data.hasOwnProperty(key)){
             this.winners.push(data[key]);
           }
       } */
     })
+    return this.organizedData;
   }
 
   getPage() {
@@ -115,27 +118,44 @@ export class MeetTheWinnersComponent implements OnInit {
 
   onTabClick(year: number): void {
     this.activeYear = year;
+    console.log("Active Year: ", this.activeYear);
   }
 
   setActiveYear(year: number): void {
     this.activeYear = year;
   }
 
-  organizeWinnersByYear(dataToBeOrganized: Winner[]): void {
+  organizeWinnersByYear(dataToBeOrganized: Winner[]): Winner {
+    const organizedData: any = {};
     this.years.push(currentYear);
-    dataToBeOrganized.forEach(winner => {
-      console.log("Winners: ", winner)
-      const year = winner.acf.chasinggood_winner_year;
+    for(const item of Object.values(dataToBeOrganized)) {
+      const year = item.acf.chasinggood_winner_year;
       if (!this.winnersByYear[year]) {
         this.winnersByYear = [];
       }
+
       if(!this.years.includes(year)){
         this.years.push(year);
       }
+      
+      if (!organizedData[year]) {
+        organizedData[year] = [];
+      }
+      
+      organizedData[year].push(item);
+      console.log(organizedData)
+    }
+
+    return organizedData;
+/*     dataToBeOrganized.forEach(winner => {
+      console.log("Winners: ", winner)
+      
+
+
       let yearArray = []
       yearArray.push(this.winnersByYear[year] = [winner])
       console.log("By Year: ", yearArray);
-    })
+    }) */
   }
 
   keys(): Array<string> { 
