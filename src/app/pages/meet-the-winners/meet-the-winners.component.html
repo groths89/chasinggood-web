@@ -5,16 +5,19 @@
       <li
         class="tab-link"
         *ngFor="let year of years"
-        [ngClass]="{ active: activeYear === year }"
-        [class.active]="year === activeYear"
-        (click)="openTab($event)"
+        [ngClass]="{ active: activeYear == year }"
+        [class.active]="year == activeYear"
+        (click)="onTabClick(year)"
         [attr.data-year]="year"
       >
         {{ year }}
       </li>
     </ul>
-    <div class="tab-content">
-      <app-winners-tab [winners]="winners"></app-winners-tab>
+    <div class="tab-content" [attr.aria-label]="this.activeYear">
+      <app-winners-tab
+        [winnersByYear]="winnersByYear"
+        [activeYear]="this.activeYear"
+      ></app-winners-tab>
     </div>
   </div>
 </div>

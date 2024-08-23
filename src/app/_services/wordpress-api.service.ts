@@ -70,7 +70,8 @@ export class WordpressApiService {
 
   getWinnersByYear(year: number): Observable<Winner[]> {
     this.endpoint = `${this.backendUrl}/wp-json/wp/v2/winners`;
-    return this.http.get<Winner[]>(`${this.endpoint}?_embed&?acf=chasinggood_winner_year=${year}`);
+    const data = this.http.get<Winner[]>(`${this.endpoint}?_embed`);
+    return data;
   }
 
   getPosts(){

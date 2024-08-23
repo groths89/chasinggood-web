@@ -3,6 +3,7 @@ import { BackendPage, Winner, WordpressApiService } from 'src/app/_services/word
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+const currentYear = new Date().getFullYear();
 @Component({
   selector: 'app-meet-the-winners',
   templateUrl: './meet-the-winners.component.html',
@@ -12,32 +13,36 @@ export class MeetTheWinnersComponent implements OnInit {
   pageObservable: Observable<any>;
   backendPage: BackendPage;
   winners: Winner[] = [];
-  years: number[] = [2024, 2023, 2022];
-  activeYear: number = 2024;
+  years: number[] = [];
+  activeYear: number | null = 2024;
+  winnersByYear: {[year: number]: Winner[] } = {}
   tabLinks = document.querySelectorAll('.tab-link');
   tabContent: HTMLElement[] = [];
+  winnersResponse: any[] = [];
+  prop:any
 
   constructor(private wordpress: WordpressApiService) { }
 
   ngOnInit(): void {
-    this.setActiveYear(this.activeYear);
+    //this.setActiveYear(this.activeYear);
     //this.getSingleWinner(47);
+    this.getWinners(this.activeYear);
+    this.keys();
     this.getPage();
-    this.getPosts();
     
         // Add event listeners to tab links
-        this.tabLinks.forEach(tab => {
-          tab.addEventListener('click', this.openTab);
-        });
+        //this.tabLinks.forEach(tab => {
+        //  tab.addEventListener('click', this.openTab);
+        //});
     
         // Activate the first tab by default
-        this.openTab({ currentTarget: document.querySelector('.tab-link:first-child') });
+        //this.openTab({ currentTarget: document.querySelector('.tab-link:first-child') });
     
-        // Populate tabContent with elements and add data-year attributes
-        this.tabContent = Array.from(document.querySelectorAll('.tab-content'));
-        this.tabContent.forEach((tab, index) => {
-          tab.setAttribute('data-year', this.years[index].toString());
-        });
+    // Populate tabContent with elements and add data-year attributes
+    this.tabContent = Array.from(document.querySelectorAll('.tab-content'));
+    this.tabContent.forEach((tab, index) => {
+      tab.setAttribute('data-year', String(this.years[index]));
+    });
     // Add event listeners to tab links
     //this.tabLinks.forEach(tab => {
     //  tab.addEventListener('click', this.openTab);
@@ -55,16 +60,18 @@ export class MeetTheWinnersComponent implements OnInit {
     )
   }
 
-  getWinners(year: number) {
+  getWinners(year: number): void {
     this.wordpress.getWinnersByYear(year).subscribe(data => {
-        for (let key in data) {
+      this.winners = data;
+      this.organizeWinnersByYear(data);
+      this.activeYear = Number(Object.keys(this.winnersByYear)[0]);
+      console.log("Active Year: ", this.activeYear)
+/*       for (let key in data) {
           if(data.hasOwnProperty(key)){
             this.winners.push(data[key]);
           }
-      }
+      } */
     })
-
-    console.log(this.winners);
   }
 
   getPage() {
@@ -83,7 +90,7 @@ export class MeetTheWinnersComponent implements OnInit {
     })
   }
 
-  openTab(event: any) {
+  openTab(event: any): void {
 /*     // Remove active class from all tab links
     this.tabLinks.forEach(tab => tab.classList.remove('active'));
 
@@ -104,12 +111,36 @@ export class MeetTheWinnersComponent implements OnInit {
     
     // Update active year and fetch winners
     this.setActiveYear(year);
-    this.getWinners(year);
   }
 
-  setActiveYear(year: number) {
+  onTabClick(year: number): void {
     this.activeYear = year;
   }
+
+  setActiveYear(year: number): void {
+    this.activeYear = year;
+  }
+
+  organizeWinnersByYear(dataToBeOrganized: Winner[]): void {
+    this.years.push(currentYear);
+    dataToBeOrganized.forEach(winner => {
+      console.log("Winners: ", winner)
+      const year = winner.acf.chasinggood_winner_year;
+      if (!this.winnersByYear[year]) {
+        this.winnersByYear = [];
+      }
+      if(!this.years.includes(year)){
+        this.years.push(year);
+      }
+      let yearArray = []
+      yearArray.push(this.winnersByYear[year] = [winner])
+      console.log("By Year: ", yearArray);
+    })
+  }
+
+  keys(): Array<string> { 
+    return Object.keys(this.winnersByYear);
+  } 
 }
 
 

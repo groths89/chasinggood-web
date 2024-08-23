@@ -7,10 +7,14 @@ import { Winner } from '../../_services/wordpress-api.service';
   styleUrls: ['./winners-tab.component.scss']
 })
 export class WinnersTabComponent implements OnInit {
+  @Input() keys: string[];
+  @Input() activeYear: number | null = 2024;
   @Input() winners: Winner[] = [];
+  @Input() winnersByYear: {[year: number]: Winner[] } = {};
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

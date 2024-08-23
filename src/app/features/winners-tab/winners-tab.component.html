@@ -1,37 +1,36 @@
-<div *ngIf="winners.length > 0">
-  <div class="winner" *ngFor="let winner of winners">
-    <div *ngIf="winner.acf.chasinggood_winner_year === 2023">
-      <div class="flex-container">
-        <div class="winner-info">
-          <div>
-            <div class="winner-item">
-              <img
-                [src]="winner._embedded['wp:featuredmedia']['0'].source_url"
-                alt="{{ winner.title.rendered }}"
-              />
-              <div class="winner-headline">
-                <h4 class="winner-name">
-                  {{ winner.acf.chasinggood_winner_name }}
-                </h4>
-                <h5 class="winner-location">
-                  {{ winner.acf.chasinggood_winner_location }}
-                </h5>
-                <div class="winner-yearplace-container">
+<div *ngIf="activeYear">
+  <h2>Winners for {{ activeYear }}</h2>
+  <div class="winner" *ngFor="let winner of winnersByYear[activeYear]">
+    <div class="flex-container">
+      <div class="winner-info">
+        <div>
+          <div class="winner-item">
+            <img
+              [src]="winner._embedded['wp:featuredmedia']['0'].source_url"
+              alt="{{ winner.title.rendered }}"
+            />
+            <div class="winner-headline">
+              <h4 class="winner-name">
+                {{ winner.acf.chasinggood_winner_name }}
+              </h4>
+              <h5 class="winner-location">
+                {{ winner.acf.chasinggood_winner_location }}
+              </h5>
+              <div class="winner-yearplace-container">
+                <div class="">
                   <div class="">
                     <div class="">
-                      <div class="">
-                        <div class="winner-year">
-                          {{ winner.acf.chasinggood_winner_year }}
-                        </div>
+                      <div class="winner-year">
+                        {{ winner.acf.chasinggood_winner_year }}
                       </div>
                     </div>
                   </div>
+                </div>
+                <div class="">
                   <div class="">
                     <div class="">
-                      <div class="">
-                        <div class="winner-place">
-                          {{ winner.acf.chasinggood_winner_place }}
-                        </div>
+                      <div class="winner-place">
+                        {{ winner.acf.chasinggood_winner_place }}
                       </div>
                     </div>
                   </div>
@@ -40,52 +39,10 @@
             </div>
           </div>
         </div>
-        <div class="winner-story" [innerHtml]="winner.content.rendered"></div>
       </div>
-    </div>
-    <div *ngIf="winner.acf.chasinggood_winner_year === 2022">
-      <div class="flex-container">
-        <div class="winner-info">
-          <div>
-            <div class="winner-item">
-              <img
-                [src]="winner._embedded['wp:featuredmedia']['0'].source_url"
-                alt="{{ winner.title.rendered }}"
-              />
-              <div class="winner-headline">
-                <h4 class="winner-name">
-                  {{ winner.acf.chasinggood_winner_name }}
-                </h4>
-                <h5 class="winner-location">
-                  {{ winner.acf.chasinggood_winner_location }}
-                </h5>
-                <div class="winner-yearplace-container">
-                  <div class="">
-                    <div class="">
-                      <div class="">
-                        <div class="winner-year">
-                          {{ winner.acf.chasinggood_winner_year }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="">
-                    <div class="">
-                      <div class="">
-                        <div class="winner-place">
-                          {{ winner.acf.chasinggood_winner_place }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="winner-story" [innerHtml]="winner.content.rendered"></div>
-      </div>
+      <div class="winner-story" [innerHtml]="winner.content.rendered"></div>
     </div>
   </div>
+
+  <div *ngIf="!winnersByYear[activeYear]">No winners for that year.</div>
 </div>
-<div *ngIf="winners.length === 0">No winners for that year.</div>
