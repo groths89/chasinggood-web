@@ -70,7 +70,7 @@ export class WordpressApiService {
 
   getWinnersByYear(year: number): Observable<Winner[]> {
     this.endpoint = `${this.backendUrl}/wp-json/wp/v2/winners`;
-    const data = this.http.get<Winner[]>(`${this.endpoint}?_embed`);
+    const data = this.http.get<Winner[]>(`${this.endpoint}?_embed&orderby=menu_order`);
     return data;
   }
 

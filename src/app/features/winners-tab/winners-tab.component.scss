@@ -18,6 +18,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     gap: 2em;
+    margin-bottom: 1em;
   }
   
   .winner-info {
@@ -29,7 +30,10 @@
   
   .winner-story {
     flex: 1;
+    max-width: 100%;
+    word-wrap: break-word;
   }
+
   
   .winner-name,
   .winner-location {

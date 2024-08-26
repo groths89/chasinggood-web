@@ -31,8 +31,6 @@ export class MeetTheWinnersComponent implements OnInit {
     this.organizedData;
     this.keys();
     this.getPage();
-    console.log("Winners By Year From Parent: ", this.winnersByYear)
-    console.log("Organized Data From Parent: ", this.organizedData)
         // Add event listeners to tab links
         //this.tabLinks.forEach(tab => {
         //  tab.addEventListener('click', this.openTab);
@@ -58,7 +56,6 @@ export class MeetTheWinnersComponent implements OnInit {
   getSingleWinner(winnerId: number) {
     this.wordpress.getSingleWinner(winnerId).subscribe(
       (data) => {
-        console.log(data);
       }
     )
   }
@@ -67,7 +64,6 @@ export class MeetTheWinnersComponent implements OnInit {
     this.wordpress.getWinnersByYear(year).subscribe(data => {
       this.winners = data;
       this.organizedData = this.organizeWinnersByYear(data);
-      console.log("Organized Data from Get Winners: ", this.organizedData)
 /*       for (let key in data) {
           if(data.hasOwnProperty(key)){
             this.winners.push(data[key]);
@@ -118,7 +114,6 @@ export class MeetTheWinnersComponent implements OnInit {
 
   onTabClick(year: number): void {
     this.activeYear = year;
-    console.log("Active Year: ", this.activeYear);
   }
 
   setActiveYear(year: number): void {
@@ -143,7 +138,6 @@ export class MeetTheWinnersComponent implements OnInit {
       }
       
       organizedData[year].push(item);
-      console.log(organizedData)
     }
 
     return organizedData;

@@ -1,7 +1,16 @@
 <div *ngIf="activeYear">
   <h2>Winners for {{ activeYear }}</h2>
-  <div class="winner" *ngFor="let winner of organizedData[activeYear]">
-    <div class="flex-container">
+  <div
+    class="winner"
+    *ngFor="let winner of organizedData[activeYear]; let i = index"
+  >
+    <div
+      class="flex-container"
+      *ngIf="i < organizedData[activeYear].length"
+      [style.borderBottom]="
+        i < organizedData[activeYear].length - 1 ? '1px solid #ccc' : ''
+      "
+    >
       <div class="winner-info">
         <div>
           <div class="winner-item">
@@ -44,5 +53,7 @@
     </div>
   </div>
 
-  <div *ngIf="!organizedData[activeYear]">No winners for that year.</div>
+  <div *ngIf="!organizedData[activeYear]">
+    Winners will be announced in December, {{ this.currentYear }}
+  </div>
 </div>

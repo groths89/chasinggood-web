@@ -7,6 +7,7 @@ import { Winner } from '../../_services/wordpress-api.service';
   styleUrls: ['./winners-tab.component.scss']
 })
 export class WinnersTabComponent implements OnInit {
+  @Input() currentYear: any;
   @Input() keys: string[];
   @Input() activeYear: number | null = 2024;
   @Input() winners: Winner[] = [];
@@ -16,8 +17,7 @@ export class WinnersTabComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log("Winners By Year From Child: ", this.winnersByYear)
-    console.log("Organized Data From Child: ", this.organizedData)
+    this.currentYear = new Date().getFullYear();
   }
 
 }

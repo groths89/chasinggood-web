@@ -66,7 +66,6 @@ export class HomeComponent implements OnDestroy, OnInit {
       (eli[index] as HTMLElement).style.flexWrap = "nowrap";
     }
 
-    console.log(document.querySelectorAll('.is-content-justification-center'));
     const eljc = document.querySelectorAll('.is-content-justification-center');
     for (let index = 0; index < eljc.length; index++) {
       (eljc[index] as HTMLElement).style.justifyContent = "center";
