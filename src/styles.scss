@@ -230,3 +230,10 @@ section {
         grid-row-gap: 13px;
     }
 }
+
+@media (max-width: 768px) {
+  /* Styles for small screens */
+  .tab-content app-winners-tab div h2 {
+    font-size: xx-large !important;
+  }
+}
