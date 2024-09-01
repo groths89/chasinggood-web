@@ -75,3 +75,10 @@ p > em {
     color: var(--primary);
     margin: -20px auto 1.5rem auto;    
 }
+
+@media (max-width: 768px) {
+    /* Styles for small screens */
+    .page-wrapper {
+      padding-top: 3em;
+    }
+}

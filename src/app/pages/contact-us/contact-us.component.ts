@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { WordpressApiService } from 'src/app/_services/wordpress-api.service';
+import { BackendPage, WordpressApiService } from 'src/app/_services/wordpress-api.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-contact-us',
@@ -7,7 +9,8 @@ import { WordpressApiService } from 'src/app/_services/wordpress-api.service';
   styleUrls: ['./contact-us.component.scss']
 })
 export class ContactUsComponent implements OnInit {
-  backendPage: any;
+  pageObservable: Observable<any>;
+  backendPage: BackendPage;
   constructor(private wordpress: WordpressApiService) { }
 
   ngOnInit(): void {
@@ -15,7 +18,6 @@ export class ContactUsComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    console.log(document.querySelectorAll('.alignfull'));
     const els = document.querySelectorAll('.alignfull');
     for (let index = 0; index < els.length; index++) {
       (els[index] as HTMLElement).style.marginTop = "0";
@@ -26,14 +28,12 @@ export class ContactUsComponent implements OnInit {
       (els[index] as HTMLElement).style.paddingLeft = "var(--wp--preset--spacing--50)";
     }
 
-    console.log(document.querySelectorAll('h2.wp-block-heading.alignwide.has-base-color.has-text-color.has-link-color.wp-elements-c9b5699bdecff18878afa112249018b5'));
     const el = document.querySelectorAll('h2.wp-block-heading.alignwide.has-base-color.has-text-color.has-link-color.wp-elements-c9b5699bdecff18878afa112249018b5');
     for (let index = 0; index < el.length; index++) {
       (el[index] as HTMLElement).style.minHeight = "100px;";
       (el[index] as HTMLElement).style.letterSpacing = "-0.02em;";
     }
 
-    console.log(document.querySelectorAll('.is-nowrap.is-layout-flex'));
     const eli = document.querySelectorAll('.is-nowrap.is-layout-flex');
     for (let index = 0; index < eli.length; index++) {
       (eli[index] as HTMLElement).style.flexDirection = "column";

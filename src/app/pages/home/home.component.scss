@@ -166,3 +166,10 @@ mat-card {
         width: 422px;
     }
 } */
+
+@media (max-width: 768px) {
+    /* Styles for small screens */
+    .page-wrapper {
+      padding-top: 10em;
+    }
+}

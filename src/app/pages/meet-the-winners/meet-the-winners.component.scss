@@ -62,14 +62,98 @@ a {
 }
 
 .page-wrapper {
-    width: 100%;
+    width: 75%;
+    justify-content: center;
     min-height: 100vh;
-    margin: 0 auto;
+    margin: 0 auto 1em;
     background: #ffffff;
-    padding-top: 2em;
+    padding-top: 3em;
+}
+
+.page-wrapper h2 {
+    text-align: center;
+    justify-content: center;
 }
 
 .dots {
     text-align: center;
     letter-spacing: 14pt;
+}
+/** WINNERS TABS STYLES */
+.tabs {
+    width: 100%;
+    background-color: #f2f2f2; /* Light background color */
+    border: 1px solid #ccc; /* Border around the tabs */
+    padding: 20px;
+  }
+  
+  .tab-links li {
+    /* Display properties */
+    display: inline-block; /* Tabs appear side-by-side */
+    list-style: none; /* Remove default bullet points */
+    padding: 10px 20px; /* Add some padding for space */
+    margin-right: 5px; /* Add spacing between tabs */
+    cursor: pointer; /* Indicate clickable behavior */
+  
+    /* Text styling */
+    font-weight: bold; /* Make tabs stand out */
+  
+    /* Border and background */
+    border: 1px solid #ccc; /* Add a subtle border */
+    border-bottom: none; /* Remove bottom border for active tab */
+    background-color: #f2f2f2; /* Light background color */
+  
+    /* Transitions for smooth hover effects (optional) */
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  /* Style the active tab link */
+  .tab-links li.active {
+    background-color: #fff; /* White background for active tab */
+    border-bottom: 2px solid #007bff; /* Add a bottom border for active tab */
+  }
+  
+  /* Style on hover effect (optional) */
+  .tab-links li:hover {
+    background-color: #ddd; /* Change background color on hover */
+  }
+  
+  .tab-content .tab {
+    display: none;
+  }
+  
+  .tab-content .tab.active {
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    /* Styles for small screens */
+    /** WINNERS TABS STYLES */
+    .tabs {
+        width: 100%;
+        background-color: #f2f2f2; /* Light background color */
+        border: 1px solid #ccc; /* Border around the tabs */
+        padding: 20px;
+    }
+  
+    .tab-links li {
+        /* Display properties */
+        display: inline-block; /* Tabs appear side-by-side */
+        list-style: none; /* Remove default bullet points */
+        padding: 10px 20px; /* Add some padding for space */
+        margin-right: 5px; /* Add spacing between tabs */
+        cursor: pointer; /* Indicate clickable behavior */
+    
+        /* Text styling */
+        font-weight: bold; /* Make tabs stand out */
+        font-size: small;
+        /* Border and background */
+        border: 1px solid #ccc; /* Add a subtle border */
+        border-bottom: none; /* Remove bottom border for active tab */
+        background-color: #f2f2f2; /* Light background color */
+    
+        /* Transitions for smooth hover effects (optional) */
+        transition: background-color 0.2s ease-in-out;
+    }
+
 }
