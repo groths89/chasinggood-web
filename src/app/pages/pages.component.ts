@@ -33,11 +33,11 @@ export class PagesComponent implements OnInit {
     //   (eli[index] as HTMLElement).style.flexWrap = "nowrap";
     // }
 
-    const eljc = document.querySelectorAll('.is-content-justification-center');
-    for (let index = 0; index < eljc.length; index++) {
-      (eljc[index] as HTMLElement).style.justifyContent = "center";
-      (eljc[index] as HTMLElement).style.paddingTop = "1em";
-    }
+    // const eljc = document.querySelectorAll('.is-content-justification-center');
+    // for (let index = 0; index < eljc.length; index++) {
+    //   (eljc[index] as HTMLElement).style.justifyContent = "center";
+    //   (eljc[index] as HTMLElement).style.paddingTop = "1em";
+    // }
   }
 
   ngOnInit(): void {

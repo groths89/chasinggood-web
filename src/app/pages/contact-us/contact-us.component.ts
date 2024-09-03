@@ -22,10 +22,10 @@ export class ContactUsComponent implements OnInit {
     for (let index = 0; index < els.length; index++) {
       (els[index] as HTMLElement).style.marginTop = "0";
       (els[index] as HTMLElement).style.marginBottom = "0";
-      (els[index] as HTMLElement).style.paddingTop = "var(--wp--preset--spacing--50)";
-      (els[index] as HTMLElement).style.paddingRight = "var(--wp--preset--spacing--50)";
-      (els[index] as HTMLElement).style.paddingBottom = "var(--wp--preset--spacing--50)";
-      (els[index] as HTMLElement).style.paddingLeft = "var(--wp--preset--spacing--50)";
+      //(els[index] as HTMLElement).style.paddingTop = "var(--wp--preset--spacing--50)";
+      //(els[index] as HTMLElement).style.paddingRight = "var(--wp--preset--spacing--50)";
+      //(els[index] as HTMLElement).style.paddingBottom = "var(--wp--preset--spacing--50)";
+      //(els[index] as HTMLElement).style.paddingLeft = "var(--wp--preset--spacing--50)";
     }
 
     const el = document.querySelectorAll('h2.wp-block-heading.alignwide.has-base-color.has-text-color.has-link-color.wp-elements-c9b5699bdecff18878afa112249018b5');
