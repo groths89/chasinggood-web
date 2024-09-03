@@ -28,7 +28,13 @@ export class AboutComponent implements OnInit {
     for (let index = 0; index < el.length; index++) {
       (el[index] as HTMLElement).style.minHeight = "100px;";
       (el[index] as HTMLElement).style.letterSpacing = "-0.02em;";
-    } 
+    }
+
+    const eljc = document.querySelectorAll('.is-content-justification-center');
+    for (let index = 0; index < eljc.length; index++) {
+      (eljc[index] as HTMLElement).style.justifyContent = "center";
+      (eljc[index] as HTMLElement).style.paddingTop = "1em";
+    }
   }
 
   ngOnInit(): void {
