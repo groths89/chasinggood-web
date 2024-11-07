@@ -3,7 +3,7 @@ import { BackendPage, Winner, WordpressApiService } from 'src/app/_services/word
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-const currentYear = new Date().getFullYear();
+const currentYear = new Date().getFullYear().toString();
 @Component({
   selector: 'app-meet-the-winners',
   templateUrl: './meet-the-winners.component.html',
@@ -13,9 +13,9 @@ export class MeetTheWinnersComponent implements OnInit {
   pageObservable: Observable<any>;
   backendPage: BackendPage;
   winners: Winner[] = [];
-  years: number[] = [];
-  activeYear: number | null = currentYear;
-  winnersByYear: {[year: number]: Winner[] } = {}
+  years: string[] = ["2024/2025"];
+  activeYear: string | null = "2024/2025";
+  winnersByYear: {[year: string]: Winner[] } = {}
   tabLinks = document.querySelectorAll('.tab-link');
   tabContent: HTMLElement[] = [];
   winnersResponse: any[] = [];
@@ -60,7 +60,7 @@ export class MeetTheWinnersComponent implements OnInit {
     )
   }
 
-  getWinners(year: number): Winner {
+  getWinners(year: string): Winner {
     this.wordpress.getWinnersByYear(year).subscribe(data => {
       this.winners = data;
       this.organizedData = this.organizeWinnersByYear(data);
@@ -106,27 +106,27 @@ export class MeetTheWinnersComponent implements OnInit {
     document.getElementById('tab-' + tabName).classList.add('active'); */
     
      // Extract year from clicked tab
-    const year = Number(event.currentTarget.dataset.year); // Use Number to convert to number
+    const year = event.currentTarget.dataset.year; // Use Number to convert to number
     
     // Update active year and fetch winners
     this.setActiveYear(year);
   }
 
-  onTabClick(year: number): void {
+  onTabClick(year: string): void {
     this.activeYear = year;
   }
 
-  setActiveYear(year: number): void {
+  setActiveYear(year: string): void {
     this.activeYear = year;
   }
 
   organizeWinnersByYear(dataToBeOrganized: Winner[]): Winner {
     const organizedData: any = {};
-    this.years.push(currentYear);
+    //this.years.push(currentYear);
     for(const item of Object.values(dataToBeOrganized)) {
       const year = item.acf.chasinggood_winner_year;
       if (!this.winnersByYear[year]) {
-        this.winnersByYear = [];
+        this.winnersByYear;
       }
 
       if(!this.years.includes(year)){

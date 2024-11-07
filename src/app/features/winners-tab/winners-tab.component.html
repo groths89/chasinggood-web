@@ -54,6 +54,6 @@
   </div>
 
   <div *ngIf="!organizedData[activeYear]">
-    Winners will be announced in December, {{ this.currentYear }}
+    <div [innerHtml]="this.backendPage.content.rendered"></div>
   </div>
 </div>
