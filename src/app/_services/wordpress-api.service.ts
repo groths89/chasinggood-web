@@ -23,7 +23,7 @@ export interface Winner {
     chasinggood_winner_headline: string,
     chasinggood_winner_name: string,
     chasinggood_winner_place: string,
-    chasinggood_winner_year: number,
+    chasinggood_winner_year: string,
     chasinggood_winner_location: string
   },
   queryParams: {
@@ -68,7 +68,7 @@ export class WordpressApiService {
     return this.http.get(this.endpoint);
   }
 
-  getWinnersByYear(year: number): Observable<Winner[]> {
+  getWinnersByYear(year: string): Observable<Winner[]> {
     this.endpoint = `${this.backendUrl}/wp-json/wp/v2/winners`;
     const data = this.http.get<Winner[]>(`${this.endpoint}?_embed&orderby=menu_order`);
     return data;

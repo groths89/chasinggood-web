@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Winner } from '../../_services/wordpress-api.service';
+import { BackendPage, Winner, WordpressApiService } from '../../_services/wordpress-api.service';
 
 @Component({
   selector: 'app-winners-tab',
@@ -7,17 +7,27 @@ import { Winner } from '../../_services/wordpress-api.service';
   styleUrls: ['./winners-tab.component.scss']
 })
 export class WinnersTabComponent implements OnInit {
+  @Input() backendPage: BackendPage;
   @Input() currentYear: any;
   @Input() keys: string[];
-  @Input() activeYear: number | null = 2024;
+  @Input() activeYear: string | null = "2024/2025";
   @Input() winners: Winner[] = [];
-  @Input() winnersByYear: {[year: number]: any } = {};
+  @Input() winnersByYear: {[year: string]: any } = {};
   @Input() organizedData: any;
 
-  constructor() { }
+  constructor(private wordpress: WordpressApiService) { }
 
   ngOnInit(): void {
     this.currentYear = new Date().getFullYear();
+    this.getPage();
+  }
+
+  getPage() {
+    this.wordpress.getSinglePage(69).subscribe(
+      (data) => {
+        this.backendPage = data;
+      }
+    );
   }
 
 }
